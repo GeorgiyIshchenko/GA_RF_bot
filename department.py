@@ -19,5 +19,5 @@ class Department(object):
         return f"{self.name}\n\n{self.description}"
 
 
-departments = [Department(obj) for obj in json.loads(open("department_data.json").read())]
+departments = [Department(obj) for obj in json.loads(open("department_data.json", encoding="utf-8").read())]
 departments_dict = {i: departments[i] for i in range(len(departments))}

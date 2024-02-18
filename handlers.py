@@ -41,8 +41,7 @@ async def department_view(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     keyboard = list()
     keyboard.append([InlineKeyboardButton(text="🗺 Путеводитель", url=department.guide_url)])
-    keyboard.append([InlineKeyboardButton(text="🔎 Поиск по отделу", url=department.search_system_url)])
-    keyboard.append([InlineKeyboardButton(text="‼️ Правила отдела", url=department.rules_url)])
+    keyboard.append([InlineKeyboardButton(text="‼️ Условия ознакомления с материалами", url=department.rules_url)])
     keyboard.append([InlineKeyboardButton(text="🚶‍♂️ Назад", callback_data="departments")])
 
     await query.message.reply_video(video=department.video_url, caption=str(department),

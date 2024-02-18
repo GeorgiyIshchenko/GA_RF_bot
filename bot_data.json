@@ -1,0 +1,27 @@
+{
+  "message_title": "Фонды",
+  "image_path": "AgACAgIAAxkBAANcZcU-bPta3-BFPX0L3B_gkSEi_-4AAqPaMRurMClKmJObzz6spUoBAAMCAAN5AAM0BA",
+  "children": [
+    {
+      "button_name": "Информация о репрессированных родственниках",
+      "message_title": "фонд 10035\nУПРАВЛЕНИЕ КОМИТЕТА ГОСУДАРСТВЕННОЙ БЕЗОПАСНОСТИ СССР (УКГБ) ПО г. МОСКВЕ И МОСКОВСКОЙ ОБЛАСТИ.\n",
+      "video_path": "BAACAgIAAxkBAAMPZcTXmYWX-TDepNxgkrsRE8KoorAAAm5CAAJ4vCBK_dmbUQgq6uw0BA",
+      "url_buttons": [
+        {
+          "name": "Поиск по фонду",
+          "url": "http://opisi.garf.su/default.asp?base=garf&menu=2&v=2&node=388&cf=1167864&fond=1125"
+        },
+        {
+          "name": "Условия ознакомления с материалами",
+          "url": "http://ivo.garant.ru/#/document/12149362/paragraph/1:0"
+        }
+      ],
+      "children": [
+        {
+          "button_name": "Из чего состоит дело репрессированного?",
+          "message_title": "Из чего состоит дело репрессированного?"
+        }
+      ]
+    }
+  ]
+}
