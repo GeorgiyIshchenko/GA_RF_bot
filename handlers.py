@@ -52,6 +52,10 @@ async def rules(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_photo(caption=text.RULES, photo=files.RULES)
 
 
+async def authors(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text(text=text.AUTHORS)
+
+
 async def photo_echo(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(text=update.message.photo[-1].file_id)
 

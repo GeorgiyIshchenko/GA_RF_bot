@@ -31,6 +31,8 @@ if __name__ == "__main__":
     application.add_handler(CommandHandler("rules", rules))
     application.add_handler(MessageHandler(filters.Regex("Правила"), rules))
 
+    application.add_handler(CommandHandler("authors", authors))
+
     application.add_handler(MessageHandler(filters.PHOTO, photo_echo))
     application.add_handler(MessageHandler(filters.VIDEO, video_echo))
 
