@@ -62,3 +62,7 @@ async def photo_echo(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def video_echo(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(text=update.message.video.file_id)
+
+
+async def doc_echo(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text(text=update.message.document.file_id)

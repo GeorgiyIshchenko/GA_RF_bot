@@ -3,9 +3,10 @@
   "image_path": "AgACAgIAAxkBAANcZcU-bPta3-BFPX0L3B_gkSEi_-4AAqPaMRurMClKmJObzz6spUoBAAMCAAN5AAM0BA",
   "children": [
     {
-      "button_name": "Информация о репрессированных родственниках",
-      "message_title": "фонд 10035\nУПРАВЛЕНИЕ КОМИТЕТА ГОСУДАРСТВЕННОЙ БЕЗОПАСНОСТИ СССР (УКГБ) ПО г. МОСКВЕ И МОСКОВСКОЙ ОБЛАСТИ.\n",
-      "video_path": "BAACAgIAAxkBAAMPZcTXmYWX-TDepNxgkrsRE8KoorAAAm5CAAJ4vCBK_dmbUQgq6uw0BA",
+      "button_name": "Репрессии",
+      "message_title": "Фонд 10035\nУПРАВЛЕНИЕ КОМИТЕТА ГОСУДАРСТВЕННОЙ БЕЗОПАСНОСТИ СССР (УКГБ) ПО г. МОСКВЕ И МОСКОВСКОЙ ОБЛАСТИ.",
+      "video_path": "BAACAgIAAxkBAAIBXmXWSeYzcvkRrivcJzcrXtO69lbQAALRTQACbtOxSnsxCgKw6Jm5NAQ",
+      "thumbnail_path": "10035thumb.jpeg",
       "url_buttons": [
         {
           "name": "Поиск по фонду",
@@ -18,8 +19,9 @@
       ],
       "children": [
         {
-          "button_name": "Из чего состоит дело репрессированного?",
-          "message_title": "Из чего состоит дело репрессированного?"
+          "button_name": "Пример дела",
+          "message_title": "Из чего состоит дело репрессированного?\n Рассмотрим на премере: Следственное дело. Чичагов Леонид Михайлович, 1856 г. р.",
+          "document_path": "BQACAgIAAxkBAAIBgGXWVeFrGpE0G1E_vezfewIBmXDuAAJPTgACbtOxSsGL55J5Uu9zNAQ"
         }
       ]
     },

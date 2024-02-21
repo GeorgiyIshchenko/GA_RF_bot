@@ -1,8 +1,10 @@
 import json
 from dataclasses import dataclass, field
 
-from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, InputMediaVideo, InputFile
 from telegram.ext import Application, ContextTypes, CallbackQueryHandler
+
+PARSE_MODE = "HTML"
 
 
 @dataclass
@@ -11,8 +13,11 @@ class QueryNode(object):
     callback_id: int = None
     button_name: str = None
     message_body: str = None
+    media_path: str = None
     image_path: str = None
     video_path: str = None
+    thumbnail_path: str = None
+    document_path: str = None
     previous: int = None
     url_buttons: list = field(default_factory=list)
     children: list = field(default_factory=list)
@@ -65,14 +70,19 @@ class QueryBot(object):
 
         if node.video_path:
             await message.reply_video(caption=node.message_title, video=node.video_path, supports_streaming=True,
-                                      reply_markup=reply_markup)
+                                      reply_markup=reply_markup, parse_mode=PARSE_MODE,
+                                      thumbnail=open(node.thumbnail_path, "rb"))
 
         elif node.image_path:
             await message.reply_photo(caption=node.message_title, photo=node.image_path,
-                                      reply_markup=reply_markup)
+                                      reply_markup=reply_markup, parse_mode=PARSE_MODE)
+
+        elif node.document_path:
+            await message.reply_document(caption=node.message_title, document=node.document_path,
+                                         reply_markup=reply_markup, parse_mode=PARSE_MODE)
 
         else:
-            await message.reply_text(text=node.message_title, reply_markup=reply_markup)
+            await message.reply_text(text=node.message_title, reply_markup=reply_markup, parse_mode=PARSE_MODE)
 
     @staticmethod
     def unpack_recursive(node: QueryNode, child_data: dict) -> None:
@@ -82,8 +92,11 @@ class QueryBot(object):
         child.message_title = child_data.get("message_title", None)
         child.button_name = child_data.get("button_name", None)
         child.message_body = child_data.get("message_body", None)
+        child.media_path = child_data.get("media_path", None)
         child.image_path = child_data.get("image_path", None)
         child.video_path = child_data.get("video_path", None)
+        child.thumbnail_path = child_data.get("thumbnail_path", None)
+        child.document_path = child_data.get("document_path", None)
         child.previous = node.callback_id
 
         for url_button_data in child_data.get("url_buttons", list()):

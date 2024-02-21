@@ -1,4 +1,5 @@
 import os
+import logging
 
 from telegram.ext import Application, CommandHandler, MessageHandler, CallbackQueryHandler, filters
 
@@ -6,6 +7,14 @@ from dotenv import load_dotenv
 
 from handlers import *
 from base_handler import QueryBot
+
+logging.basicConfig(
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
+)
+# set higher logging level for httpx to avoid all GET and POST requests being logged
+logging.getLogger("httpx").setLevel(logging.WARNING)
+
+logger = logging.getLogger(__name__)
 
 load_dotenv()
 BOT_TOKEN = os.getenv('BOT_TOKEN')
@@ -35,5 +44,6 @@ if __name__ == "__main__":
 
     application.add_handler(MessageHandler(filters.PHOTO, photo_echo))
     application.add_handler(MessageHandler(filters.VIDEO, video_echo))
+    application.add_handler(MessageHandler(filters.Document.ALL, doc_echo))
 
     application.run_polling()
