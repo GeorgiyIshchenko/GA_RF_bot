@@ -1,19 +1,26 @@
-from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, KeyboardButton, ReplyKeyboardMarkup
-from telegram.ext import ContextTypes
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardRemove, KeyboardButton, \
+    ReplyKeyboardMarkup, WebAppInfo
+from telegram.ext import ContextTypes, ConversationHandler
 
 import text
 import files
 
 from department import *
 
+FIRST, SECOND, THIRD = range(3)
+
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_video_note(video_note=files.START_VIDEO_NOTE)
     reply_markup = ReplyKeyboardMarkup(
-        keyboard=[[KeyboardButton(text="Фонды"), KeyboardButton(text="Правила")]],
+        keyboard=[[KeyboardButton(text="Пройти опрос")],
+                  [KeyboardButton(text="Фонды"), KeyboardButton(text="Правила")]],
         one_time_keyboard=True,
-        input_field_placeholder="Перед изучением фондов рекомендуется ознакомиться с правилами."
+        input_field_placeholder="Перед изучением фондов рекомендуется пройти опрос."
     )
-    await update.message.reply_photo(caption=text.START, photo=files.START, reply_markup=reply_markup)
+    await update.message.reply_text(text=text.START, reply_markup=reply_markup)
+
+    return FIRST
 
 
 async def departments(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -66,3 +73,39 @@ async def video_echo(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def doc_echo(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(text=update.message.document.file_id)
+
+
+async def video_note_echo(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text(text=update.message.video_note.file_id)
+
+
+async def web_app(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text("Web App", reply_markup=InlineKeyboardMarkup(
+        [[InlineKeyboardButton(text="WebApp", web_app=WebAppInfo("D:/Projects/fullmotion/index.html"))]]))
+
+
+async def initial_q(update: Update, context: ContextTypes):
+    await update.message.reply_text(text="❓ Что вы знаете о человеке?", reply_markup=ReplyKeyboardMarkup([
+        [KeyboardButton(text="Был репрессирован")],
+        [KeyboardButton(text="Участвовал в ВОВ")]
+    ]))
+
+    return SECOND
+
+
+async def repression_q(update: Update, context: ContextTypes):
+    await update.message.reply_text(text="Вам подойдет фонд \"Репрессии\"")
+    return ConversationHandler.END
+
+
+async def vov_q(update: Update, context: ContextTypes):
+    await update.message.reply_text(text="Вам подойдет фонд \"ВОВ\"")
+    return ConversationHandler.END
+
+
+async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    await update.message.reply_text(
+        "Пока! Надеюсь, ", reply_markup=ReplyKeyboardRemove()
+    )
+
+    return ConversationHandler.END
